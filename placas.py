@@ -4,8 +4,6 @@ from PIL import Image
 import easyocr
 from PIL import ImageFilter
 
-
-
 #read the image
 img = cv.imread('C:\\Users\\monse\\Downloads\\placa_4.jpg')
 
@@ -29,7 +27,6 @@ res = cv.bitwise_and(img, img, mask=mask)
 #Save the image
 cv.imwrite("mask.png", mask)
 
-
 """
 ----------------- Gaussian filter ----------------------------------
 """
@@ -42,30 +39,25 @@ blurred_image = cv.GaussianBlur(image, (25, 25), 0)
 # Save the blurred image 
 cv.imwrite('blurred_placa.jpg', blurred_image)
 
-
 """
 ----------------- Borders ----------------------------------
 """
 
-img = cv.imread('blurred_placa.jpg') 
- 
+img = cv.imread('blurred_placa.jpg')  
 
 sobelx = cv.Sobel(img, cv.CV_64F, 1, 0, ksize=5)
 sobely = cv.Sobel(img, cv.CV_64F, 0, 1, ksize=5)
 sobelxy = cv.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
 
-
 """
 ----------------- Applying new blur ----------------------------------
 """
-
 
 # Apply Gaussian blur
 sobelxy = cv.GaussianBlur(image, (25, 25), 0)
 
 # Save the blurred image 
 cv.imwrite('borders_placa.jpg', blurred_image)
-
 
 """
 ----------------- Text detection ----------------------------------
@@ -93,7 +85,4 @@ for res in result:
      cv.circle(image, pt2, 2, (0, 0, 255), 2)
      cv.circle(image, pt3, 2, (0, 255, 255), 2)
 
-
      cv.imwrite("Placa1.png", image)
-
-
