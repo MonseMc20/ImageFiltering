@@ -8,10 +8,6 @@ from PIL import Image
 #read the image
 img = cv.imread('C:\\Users\\monse\\Downloads\\placa_4.jpg')
 
-"""
------------------ Filter black color ----------------------------------
-"""
-
 #convert the BGR image to HSV colour space
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 
@@ -28,9 +24,6 @@ res = cv.bitwise_and(img, img, mask=mask)
 #Save the image
 cv.imwrite('mask.png', mask)
 
-"""
------------------ Gaussian filter ----------------------------------
-"""
 # Load the image
 image = cv.imread('mask.png')
 
@@ -40,29 +33,17 @@ blurred_image = cv.GaussianBlur(image, (25, 25), 0)
 # Save the blurred image 
 cv.imwrite('blurred_placa.jpg', blurred_image)
 
-"""
------------------ Borders ----------------------------------
-"""
-
 img = cv.imread('blurred_placa.jpg')  
 
 sobel_x = cv.Sobel(img, cv.CV_64F, 1, 0, ksize=5)
 sobel_y = cv.Sobel(img, cv.CV_64F, 0, 1, ksize=5)
 sobel_xy = cv.addWeighted(sobel_x, 0.5, sobel_y, 0.5, 0)
 
-"""
------------------ Applying new blur ----------------------------------
-"""
-
 # Apply Gaussian blur
 sobel_xy = cv.GaussianBlur(image, (25, 25), 0)
 
 # Save the blurred image 
 cv.imwrite('borders_placa.jpg', blurred_image)
-
-"""
------------------ Text detection ----------------------------------
-"""
 
 #spanish language
 reader = easyocr.Reader(['es'], gpu=False)
