@@ -46,16 +46,16 @@ cv.imwrite('blurred_placa.jpg', blurred_image)
 
 img = cv.imread('blurred_placa.jpg')  
 
-sobelx = cv.Sobel(img, cv.CV_64F, 1, 0, ksize=5)
-sobely = cv.Sobel(img, cv.CV_64F, 0, 1, ksize=5)
-sobelxy = cv.addWeighted(sobelx, 0.5, sobely, 0.5, 0)
+sobel_x = cv.Sobel(img, cv.CV_64F, 1, 0, ksize=5)
+sobel_y = cv.Sobel(img, cv.CV_64F, 0, 1, ksize=5)
+sobel_xy = cv.addWeighted(sobel_x, 0.5, sobel_y, 0.5, 0)
 
 """
 ----------------- Applying new blur ----------------------------------
 """
 
 # Apply Gaussian blur
-sobelxy = cv.GaussianBlur(image, (25, 25), 0)
+sobel_xy = cv.GaussianBlur(image, (25, 25), 0)
 
 # Save the blurred image 
 cv.imwrite('borders_placa.jpg', blurred_image)
@@ -72,18 +72,18 @@ result = reader.readtext(image, paragraph=False)
 
 for res in result:
      print('res:', res)
-     pt0 = res[0][0]
-     pt1 = res[0][1]
-     pt2 = res[0][2]
-     pt3 = res[0][3]
+     pt_0 = res[0][0]
+     pt_1 = res[0][1]
+     pt_2 = res[0][2]
+     pt_3 = res[0][3]
 
-     cv.rectangle(image, pt0, (pt1[0], pt1[1] - 23), (166, 56, 242), -1)
-     cv.putText(image, res[1], (pt0[0], pt0[1] -3), 2, 0.8, (255, 255, 255), 1)
+     cv.rectangle(image, pt_0, (pt_1[0], pt_1[1] - 23), (166, 56, 242), -1)
+     cv.putText(image, res[1], (pt_0[0], pt_0[1] -3), 2, 0.8, (255, 255, 255), 1)
 
-     cv.rectangle(image, pt0, pt2, (166, 56, 242), 2)
-     cv.circle(image, pt0, 2, (255, 0, 0), 2)
-     cv.circle(image, pt1, 2, (0, 255, 0), 2)
-     cv.circle(image, pt2, 2, (0, 0, 255), 2)
-     cv.circle(image, pt3, 2, (0, 255, 255), 2)
+     cv.rectangle(image, pt_0, pt_2, (166, 56, 242), 2)
+     cv.circle(image, pt_0, 2, (255, 0, 0), 2)
+     cv.circle(image, pt_1, 2, (0, 255, 0), 2)
+     cv.circle(image, pt_2, 2, (0, 0, 255), 2)
+     cv.circle(image, pt_3, 2, (0, 255, 255), 2)
 
-     cv.imwrite('Placa1.png', image)
+     cv.imwrite('placa_1.png', image)
