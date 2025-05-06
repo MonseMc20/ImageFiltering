@@ -26,7 +26,7 @@ mask = cv.inRange(hsv, lower_black, upper_black)
 res = cv.bitwise_and(img, img, mask=mask)
 
 #Save the image
-cv.imwrite("mask.png", mask)
+cv.imwrite('mask.png', mask)
 
 """
 ----------------- Gaussian filter ----------------------------------
@@ -65,13 +65,13 @@ cv.imwrite('borders_placa.jpg', blurred_image)
 """
 
 #spanish language
-reader = easyocr.Reader(["es"], gpu=False)
+reader = easyocr.Reader(['es'], gpu=False)
 image = cv.imread("borders_placa.jpg")
 
 result = reader.readtext(image, paragraph=False)
 
 for res in result:
-     print("res:", res)
+     print('res:', res)
      pt0 = res[0][0]
      pt1 = res[0][1]
      pt2 = res[0][2]
@@ -86,4 +86,4 @@ for res in result:
      cv.circle(image, pt2, 2, (0, 0, 255), 2)
      cv.circle(image, pt3, 2, (0, 255, 255), 2)
 
-     cv.imwrite("Placa1.png", image)
+     cv.imwrite('Placa1.png', image)
