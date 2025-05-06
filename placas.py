@@ -1,8 +1,9 @@
-import numpy as np
-import cv2 as cv
-from PIL import Image
 import easyocr
+import numpy as np
+
+import cv2 as cv
 from PIL import ImageFilter
+from PIL import Image
 
 #read the image
 img = cv.imread('C:\\Users\\monse\\Downloads\\placa_4.jpg')
